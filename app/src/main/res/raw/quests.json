@@ -2,11 +2,12 @@
   "quests": [{
     "quest1": {
       "name": "Test Activity",
+      "description": "Desc",
       "segments": [{
         "data-fields": ["latitude", "longitude", "elevation", "indication"]
       },
         [
-          [47.407614681869745, 8.553115781396627, 451.79998779296875, "2015-11-13T12:57:24.000Z", ""],
+          [47.407614681869745, 8.553115781396627, 451.79998779296875, "2015-11-13T12:57:24.000Z", "lol"],
           [47.40762138739228, 8.553108656778932, 451.0, "2015-11-13T12:57:25.000Z", ""],
           [47.407626835629344, 8.553094072267413, 450.0, "2015-11-13T12:57:26.000Z", ""]
         ]
@@ -14,6 +15,7 @@
     },
     "quest2": {
       "name": "Test Activity2",
+      "description": "",
       "segments": [{
         "data-fields": ["latitude", "longitude", "elevation", "indication"]
       },

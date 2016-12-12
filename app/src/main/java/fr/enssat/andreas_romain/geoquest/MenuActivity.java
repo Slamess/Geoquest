@@ -10,8 +10,19 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ListView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
+
+    @SerializedName("quests")
+    List<Quest> questsList = new ArrayList<Quest>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +42,13 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
         final Button mapbt = (Button) findViewById(R.id.mapButton);
         mapbt.setOnClickListener(this);
+        showList();
+    }
+
+    protected void showList() {
+        ListView QuestsList = (ListView) findViewById(R.id.QuestsList);
+        QuestsAdapter questsAdapter = new QuestsAdapter(MenuActivity.this, questsList);
+        QuestsList.setAdapter(questsAdapter);
     }
 
     @Override
@@ -59,5 +77,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent = new Intent(MenuActivity.this, QuestActivity.class);
         startActivity(intent);
+    }
+
+    public Quest parseJSON(String response) {
+        Gson gson = new GsonBuilder().create();
+        this.questsList = gson.fromJson(response, Quest.class);
     }
 }
