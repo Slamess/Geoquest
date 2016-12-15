@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +50,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
         final Button mapbt = (Button) findViewById(R.id.mapButton);
         mapbt.setOnClickListener(this);
-        //parseJSON("../../res/raw/quests.json");
+        try {
+            parseJSON();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         showList();
     }
 
@@ -80,9 +93,24 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    public void parseJSON(String response) {
+    public void parseJSON() throws FileNotFoundException {
+        InputStream json = getResources().openRawResource(R.raw.quests);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        byte buf[] = new byte[1024];
+        int len;
+        try {
+            while ((len = json.read(buf)) != -1) {
+                outputStream.write(buf, 0, len);
+            }
+            outputStream.close();
+            json.close();
+        } catch (IOException e) {
+
+        }
+
         Gson gson = new GsonBuilder().create();
-        Quest quest = gson.fromJson(response, Quest.class);
+        Quest quest = gson.fromJson(outputStream.toString(), Quest.class);
         this.questsList.add(quest);
     }
 }

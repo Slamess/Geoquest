@@ -9,11 +9,11 @@ import java.util.List;
 public class Quest {
     String name;
     String description;
-    String[][] coords;
+    String[][] segments;
 
-    public Quest(String name, String description, String[][] coords){
+    public Quest(String name, String description, String[][] segments){
         this.name = name;
         this.description = description;
-        this.coords = coords;
+        this.segments = segments;
     };
 }
