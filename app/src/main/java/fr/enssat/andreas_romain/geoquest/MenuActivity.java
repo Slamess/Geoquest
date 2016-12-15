@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //@SerializedName("quests")
+    @SerializedName("quests")
     List<Quest> questsList = new ArrayList<Quest>();
 
     @Override
@@ -42,6 +42,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
         final Button mapbt = (Button) findViewById(R.id.mapButton);
         mapbt.setOnClickListener(this);
+        //parseJSON("../../res/raw/quests.json");
         showList();
     }
 
@@ -79,8 +80,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    /*public Quest parseJSON(String response) {
+    public void parseJSON(String response) {
         Gson gson = new GsonBuilder().create();
-        this.questsList = gson.fromJson(response, Quest.class);
-    }*/
+        Quest quest = gson.fromJson(response, Quest.class);
+        this.questsList.add(quest);
+    }
 }
