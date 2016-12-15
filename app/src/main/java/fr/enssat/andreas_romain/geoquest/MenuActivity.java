@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
 
-    @SerializedName("quests")
+    //@SerializedName("quests")
     List<Quest> questsList = new ArrayList<Quest>();
 
     @Override
@@ -79,8 +79,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    public Quest parseJSON(String response) {
+    /*public Quest parseJSON(String response) {
         Gson gson = new GsonBuilder().create();
         this.questsList = gson.fromJson(response, Quest.class);
-    }
+    }*/
 }
